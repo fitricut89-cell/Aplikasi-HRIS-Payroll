@@ -9,3 +9,6 @@ Route::get('/', function () {
 Route::get('/karyawan', function () {
     return view('karyawan');
 });
+Route::get('/jabatan', function () {
+    return view('jabatan');
+});

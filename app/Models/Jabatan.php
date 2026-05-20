@@ -14,7 +14,6 @@ class Jabatan extends Model
     protected $fillable = [
         'nama_jabatan',
         'gaji_pokok',
-        'tunjangan',
         'deskripsi'
     ];
 }

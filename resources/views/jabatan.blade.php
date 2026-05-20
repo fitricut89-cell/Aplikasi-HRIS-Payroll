@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Modul Jabatan - HRIS Payroll</title>
@@ -197,6 +198,7 @@
     </style>
 
 </head>
+
 <body>
 
 <div class="container">
@@ -402,7 +404,10 @@
 
             },
 
-            error:function(){
+            error:function(xhr){
+
+                console.log(xhr.responseText);
+
                 alert("Gagal mengambil data jabatan");
             }
 
@@ -418,17 +423,17 @@
 
         let id = $("#id_jabatan").val();
 
-        let method = id ? "PUT" : "POST";
-
         let url = id ? apiUrl + "/" + id : apiUrl;
 
         $.ajax({
 
             url: url,
 
-            type: method,
+            type: "POST",
 
             data:{
+
+                _method: id ? "PUT" : "POST",
 
                 nama_jabatan: $("#nama_jabatan").val(),
 
@@ -448,7 +453,10 @@
 
             },
 
-            error:function(){
+            error:function(xhr){
+
+                console.log(xhr.responseText);
+
                 alert("Gagal menyimpan data jabatan");
             }
 
@@ -485,7 +493,11 @@
 
                 url: apiUrl + "/" + id,
 
-                type: "DELETE",
+                type: "POST",
+
+                data:{
+                    _method:"DELETE"
+                },
 
                 success:function(response){
 
@@ -495,7 +507,10 @@
 
                 },
 
-                error:function(){
+                error:function(xhr){
+
+                    console.log(xhr.responseText);
+
                     alert("Gagal menghapus data jabatan");
                 }
 

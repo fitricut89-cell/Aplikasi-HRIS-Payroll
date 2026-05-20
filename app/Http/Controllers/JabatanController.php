@@ -8,31 +8,25 @@ use App\Models\Jabatan;
 class JabatanController extends Controller
 {
     public function index()
-{
-    return response()->json([
-        'message' => 'Data jabatan berhasil diambil',
-        'data' => Jabatan::all()
-    ], 200);
-}
+    {
+        return response()->json([
+            'message' => 'Data jabatan berhasil diambil',
+            'data' => Jabatan::all()
+        ], 200);
+    }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_jabatan' => 'required',
-            'gaji_pokok' => 'required',
-        ]);
-
         $jabatan = Jabatan::create([
             'nama_jabatan' => $request->nama_jabatan,
             'gaji_pokok' => $request->gaji_pokok,
-            'tunjangan' => $request->tunjangan,
             'deskripsi' => $request->deskripsi,
         ]);
 
         return response()->json([
             'message' => 'Data berhasil ditambahkan',
             'data' => $jabatan
-        ]);
+        ], 201);
     }
 
     public function show($id)
@@ -61,14 +55,13 @@ class JabatanController extends Controller
         $jabatan->update([
             'nama_jabatan' => $request->nama_jabatan,
             'gaji_pokok' => $request->gaji_pokok,
-            'tunjangan' => $request->tunjangan,
             'deskripsi' => $request->deskripsi,
         ]);
 
         return response()->json([
             'message' => 'Data berhasil diupdate',
             'data' => $jabatan
-        ]);
+        ], 200);
     }
 
     public function destroy($id)
@@ -85,6 +78,6 @@ class JabatanController extends Controller
 
         return response()->json([
             'message' => 'Data berhasil dihapus'
-        ]);
+        ], 200);
     }
 }

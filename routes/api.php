@@ -2,14 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\GajiController;
-
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+use App\Http\Controllers\KehadiranController;
 
 Route::apiResource('karyawans', KaryawanController::class);
-Route::apiResource('gajis', GajiController::class);
-use App\Http\Controllers\JabatanController;
-
 Route::apiResource('jabatans', JabatanController::class);
+Route::apiResource('gajis', GajiController::class);
+Route::apiResource('kehadirans', KehadiranController::class);

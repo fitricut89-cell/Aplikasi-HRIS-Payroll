@@ -1,23 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\GajiController;
+use App\Http\Controllers\KehadiranController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/karyawan', function () {
-    return view('karyawan');
-});
-
-Route::get('/jabatan', function () {
-    return view('jabatan');
-});
-
-Route::get('/gaji', function () {
-    return view('gaji');
-});
-
-Route::get('/kehadiran', function () {
-    return view('kehadiran');
-});
+Route::apiResource('karyawans', KaryawanController::class);
+Route::apiResource('jabatans', JabatanController::class);
+Route::apiResource('gajis', GajiController::class);
+Route::apiResource('kehadirans', KehadiranController::class);

@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Karyawan extends Model
 {
     protected $fillable = [
-    'nama',
-    'jabatan',
-    'email'
-];
+        'jabatan_id',
+        'nama',
+        'email',
+        'no_hp',
+        'alamat',
+        'tanggal_masuk',
+        'status_karyawan'
+    ];
 }

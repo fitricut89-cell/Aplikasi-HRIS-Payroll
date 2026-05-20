@@ -9,9 +9,10 @@ class JabatanController extends Controller
 {
     public function index()
 {
-    $data = Jabatan::all();
-
-    return view('jabatan', compact('data'));
+    return response()->json([
+        'message' => 'Data jabatan berhasil diambil',
+        'data' => Jabatan::all()
+    ], 200);
 }
 
     public function store(Request $request)

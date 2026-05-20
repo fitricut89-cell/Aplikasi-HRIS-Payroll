@@ -17,15 +17,19 @@ class GajiController extends Controller
 
     public function store(Request $request)
     {
-        $totalGaji = ($request->gaji_pokok + $request->tunjangan) - $request->potongan;
+        $gajiPokok = (int) $request->gaji_pokok;
+        $tunjangan = (int) $request->tunjangan;
+        $potongan = (int) $request->potongan;
+
+        $totalGaji = ($gajiPokok + $tunjangan) - $potongan;
 
         $gaji = Gaji::create([
-            'karyawan_id' => $request->karyawan_id,
+            'karyawan_id' => (int) $request->karyawan_id,
             'bulan' => $request->bulan,
-            'tahun' => $request->tahun,
-            'gaji_pokok' => $request->gaji_pokok,
-            'tunjangan' => $request->tunjangan,
-            'potongan' => $request->potongan,
+            'tahun' => (int) $request->tahun,
+            'gaji_pokok' => $gajiPokok,
+            'tunjangan' => $tunjangan,
+            'potongan' => $potongan,
             'total_gaji' => $totalGaji
         ]);
 
@@ -61,15 +65,19 @@ class GajiController extends Controller
             ], 404);
         }
 
-        $totalGaji = ($request->gaji_pokok + $request->tunjangan) - $request->potongan;
+        $gajiPokok = (int) $request->gaji_pokok;
+        $tunjangan = (int) $request->tunjangan;
+        $potongan = (int) $request->potongan;
+
+        $totalGaji = ($gajiPokok + $tunjangan) - $potongan;
 
         $gaji->update([
-            'karyawan_id' => $request->karyawan_id,
+            'karyawan_id' => (int) $request->karyawan_id,
             'bulan' => $request->bulan,
-            'tahun' => $request->tahun,
-            'gaji_pokok' => $request->gaji_pokok,
-            'tunjangan' => $request->tunjangan,
-            'potongan' => $request->potongan,
+            'tahun' => (int) $request->tahun,
+            'gaji_pokok' => $gajiPokok,
+            'tunjangan' => $tunjangan,
+            'potongan' => $potongan,
             'total_gaji' => $totalGaji
         ]);
 

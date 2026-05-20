@@ -2,271 +2,340 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>HRIS Payroll - Modul Kehadiran</title>
+    <title>Modul Kehadiran - HRIS Payroll</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <style>
-        * {
-            box-sizing: border-box;
+        *{
+            box-sizing:border-box;
+            font-family:"Segoe UI", sans-serif;
         }
 
-        body {
-            margin: 0;
-            font-family: "Segoe UI", sans-serif;
-            background: linear-gradient(135deg, #fff7ed, #fef2f2);
-            color: #1f2937;
+        body{
+            margin:0;
+            background:#6f8764;
+            color:#1f2937;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
+        .navbar{
+            width:90%;
+            max-width:1200px;
+            margin:30px auto 0;
+            height:85px;
+            background:white;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:0 45px;
+            border-radius:25px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.08);
         }
 
-        .header {
-            background: linear-gradient(135deg, #dc2626, #f59e0b);
-            padding: 30px;
-            border-radius: 20px;
-            color: white;
-            margin-bottom: 25px;
-            box-shadow: 0 12px 30px rgba(220, 38, 38, 0.3);
+        .logo{
+            font-size:30px;
+            font-weight:800;
+            color:#3d6b2f;
         }
 
-        .header h1 {
-            margin: 0;
-            font-size: 30px;
+        .nav-menu{
+            display:flex;
+            gap:26px;
+            align-items:center;
         }
 
-        .header p {
-            margin-top: 8px;
-            opacity: 0.95;
+        .nav-menu a{
+            text-decoration:none;
+            color:#2f3d2a;
+            font-weight:600;
+            font-size:15px;
         }
 
-        .card {
-            background: white;
-            border-radius: 18px;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-top: 6px solid #dc2626;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        .nav-menu a:hover{
+            color:#4f8b3d;
         }
 
-        .card h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            color: #991b1b;
+        .btn-nav{
+            background:#4f8b3d;
+            color:white !important;
+            padding:12px 24px;
+            border-radius:30px;
         }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
+        .container{
+            width:90%;
+            max-width:1200px;
+            margin:30px auto 40px;
         }
 
-        .full {
-            grid-column: span 2;
+        .header{
+            background:
+                linear-gradient(rgba(18,48,25,0.55), rgba(18,48,25,0.75)),
+                url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1400&auto=format&fit=crop');
+            background-size:cover;
+            background-position:center;
+            padding:40px;
+            border-radius:25px;
+            color:white;
+            margin-bottom:25px;
+            box-shadow:0 12px 28px rgba(0,0,0,0.15);
         }
 
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            color: #7f1d1d;
+        .header h1{
+            margin:0 0 10px;
+            font-size:38px;
+        }
+
+        .header p{
+            margin:0;
+            color:#f2f2f2;
+        }
+
+        .card{
+            background:white;
+            padding:28px;
+            border-radius:22px;
+            margin-bottom:25px;
+            box-shadow:0 8px 22px rgba(0,0,0,0.08);
+        }
+
+        .card h2{
+            margin-top:0;
+            margin-bottom:22px;
+            color:#2f3d2a;
+            font-size:28px;
+        }
+
+        .form-grid{
+            display:grid;
+            grid-template-columns:repeat(2, 1fr);
+            gap:18px;
+        }
+
+        .full{
+            grid-column:span 2;
+        }
+
+        label{
+            display:block;
+            margin-bottom:7px;
+            font-weight:600;
+            color:#374151;
+        }
+
+        .required{
+            color:red;
+            font-weight:bold;
         }
 
         input,
         select,
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #d1d5db;
-            background: #f9fafb;
-            outline: none;
-            transition: 0.2s;
+        textarea{
+            width:100%;
+            padding:13px 15px;
+            border-radius:12px;
+            border:1px solid #d1d5db;
+            background:#f9fafb;
+            outline:none;
+            transition:0.3s;
         }
 
         input:focus,
         select:focus,
-        textarea:focus {
-            border-color: #dc2626;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.15);
+        textarea:focus{
+            border-color:#4f8b3d;
+            background:white;
+            box-shadow:0 0 0 4px rgba(79,139,61,0.15);
         }
 
-        textarea {
-            min-height: 90px;
-            resize: vertical;
+        textarea{
+            min-height:95px;
+            resize:vertical;
         }
 
-        .button-group {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
+        .button-group{
+            margin-top:22px;
+            display:flex;
+            gap:12px;
         }
 
-        button {
-            border: none;
-            padding: 12px 18px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.2s;
+        button{
+            border:none;
+            padding:12px 18px;
+            border-radius:12px;
+            cursor:pointer;
+            font-weight:600;
+            transition:0.3s;
         }
 
-        button:hover {
-            transform: translateY(-2px);
+        button:hover{
+            transform:translateY(-2px);
         }
 
-        .btn-primary {
-            background: #dc2626;
-            color: white;
+        .btn-primary{
+            background:#4f8b3d;
+            color:white;
         }
 
-        .btn-primary:hover {
-            background: #b91c1c;
+        .btn-reset{
+            background:#f59e0b;
+            color:white;
         }
 
-        .btn-reset {
-            background: #f59e0b;
-            color: white;
+        .btn-edit{
+            background:#d9f99d;
+            color:#365314;
+            padding:9px 14px;
+            margin-right:6px;
         }
 
-        .btn-reset:hover {
-            background: #d97706;
+        .btn-delete{
+            background:#dc2626;
+            color:white;
+            padding:9px 14px;
         }
 
-        .btn-edit {
-            background: #facc15;
-            color: #111827;
-            padding: 8px 12px;
-            margin-right: 6px;
+        .table-wrapper{
+            overflow-x:auto;
         }
 
-        .btn-edit:hover {
-            background: #eab308;
+        table{
+            width:100%;
+            border-collapse:collapse;
+            min-width:900px;
         }
 
-        .btn-delete {
-            background: #dc2626;
-            color: white;
-            padding: 8px 12px;
+        th{
+            background:#ecf7df;
+            color:#365314;
+            padding:15px;
+            text-align:left;
+            font-size:14px;
         }
 
-        .btn-delete:hover {
-            background: #b91c1c;
+        td{
+            padding:15px;
+            border-bottom:1px solid #e5e7eb;
+            font-size:14px;
         }
 
-        .table-wrapper {
-            overflow-x: auto;
+        tr:hover{
+            background:#f7fbea;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 900px;
+        .badge{
+            padding:6px 12px;
+            border-radius:999px;
+            font-size:12px;
+            font-weight:700;
         }
 
-        th {
-            background: #fef3c7;
-            color: #991b1b;
-            padding: 14px;
-            text-align: left;
+        .badge-hadir{
+            background:#dcfce7;
+            color:#166534;
         }
 
-        td {
-            padding: 14px;
-            border-bottom: 1px solid #e5e7eb;
+        .badge-izin{
+            background:#fef3c7;
+            color:#92400e;
         }
 
-        tr:hover {
-            background: #fff7ed;
+        .badge-sakit{
+            background:#e0f2fe;
+            color:#075985;
         }
 
-        .badge {
-            padding: 6px 12px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 700;
+        .badge-alpa{
+            background:#fee2e2;
+            color:#991b1b;
         }
 
-        .badge-hadir {
-            background: #fee2e2;
-            color: #991b1b;
+        .badge-terlambat{
+            background:#ffedd5;
+            color:#9a3412;
         }
 
-        .badge-izin {
-            background: #fef3c7;
-            color: #92400e;
+        .empty{
+            text-align:center;
+            padding:35px;
+            color:#6b7280;
         }
 
-        .badge-sakit {
-            background: #fde68a;
-            color: #78350f;
-        }
-
-        .badge-alpa {
-            background: #fecaca;
-            color: #7f1d1d;
-        }
-
-        .badge-terlambat {
-            background: #fcd34d;
-            color: #78350f;
-        }
-
-        .empty {
-            text-align: center;
-            padding: 30px;
-            color: #6b7280;
-        }
-
-        @media(max-width: 768px) {
-            .form-grid {
-                grid-template-columns: 1fr;
+        @media(max-width:768px){
+            .navbar{
+                flex-direction:column;
+                height:auto;
+                gap:18px;
+                padding:25px;
             }
 
-            .full {
-                grid-column: span 1;
+            .nav-menu{
+                flex-wrap:wrap;
+                justify-content:center;
+                gap:15px;
             }
 
-            .button-group {
-                flex-direction: column;
+            .form-grid{
+                grid-template-columns:1fr;
             }
 
-            .header h1 {
-                font-size: 24px;
+            .full{
+                grid-column:span 1;
+            }
+
+            .button-group{
+                flex-direction:column;
+            }
+
+            .header{
+                padding:30px;
+            }
+
+            .header h1{
+                font-size:30px;
             }
         }
     </style>
 </head>
+
 <body>
+
+<nav class="navbar">
+    <div class="logo">HRIS Payroll</div>
+
+    <div class="nav-menu">
+        <a href="/">Home</a>
+        <a href="/karyawan">Karyawan</a>
+        <a href="/jabatan">Jabatan</a>
+        <a href="/kehadiran">Kehadiran</a>
+        <a href="/gaji">Gaji</a>
+        <a href="/cuti">Cuti</a>
+        <a href="/" class="btn-nav">Dashboard</a>
+    </div>
+</nav>
 
 <div class="container">
 
     <div class="header">
         <h1>Modul Kehadiran Karyawan</h1>
-        <p>Aplikasi HRIS & Payroll</p>
+        <p>Kelola data absensi dan kehadiran karyawan perusahaan</p>
     </div>
 
     <div class="card">
         <h2>Form Kehadiran</h2>
 
         <form id="formKehadiran">
-
             <input type="hidden" id="id_kehadiran">
 
             <div class="form-grid">
-
                 <div>
-                    <label>ID Karyawan</label>
+                    <label>ID Karyawan <span class="required">*</span></label>
                     <input type="number" id="karyawan_id" required>
                 </div>
 
                 <div>
-                    <label>Tanggal</label>
+                    <label>Tanggal <span class="required">*</span></label>
                     <input type="date" id="tanggal" required>
                 </div>
 
@@ -281,8 +350,7 @@
                 </div>
 
                 <div class="full">
-                    <label>Status Kehadiran</label>
-
+                    <label>Status Kehadiran <span class="required">*</span></label>
                     <select id="status_kehadiran" required>
                         <option value="">-- Pilih Status --</option>
                         <option value="Hadir">Hadir</option>
@@ -295,9 +363,8 @@
 
                 <div class="full">
                     <label>Keterangan</label>
-                    <textarea id="keterangan"></textarea>
+                    <textarea id="keterangan" placeholder="Masukkan keterangan tambahan"></textarea>
                 </div>
-
             </div>
 
             <div class="button-group">
@@ -309,18 +376,14 @@
                     Reset Form
                 </button>
             </div>
-
         </form>
     </div>
 
     <div class="card">
-
         <h2>Data Kehadiran</h2>
 
         <div class="table-wrapper">
-
             <table>
-
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -335,21 +398,16 @@
                 </thead>
 
                 <tbody id="dataKehadiran"></tbody>
-
             </table>
-
         </div>
-
     </div>
 
 </div>
 
 <script>
-
     const apiUrl = "/api/kehadirans";
 
     function getBadge(status) {
-
         let className = "badge";
 
         if(status === "Hadir") {
@@ -374,17 +432,13 @@
     }
 
     function loadKehadiran() {
-
         $.ajax({
             url: apiUrl,
             type: "GET",
-
             success: function(response) {
-
                 let rows = "";
 
-                if(response.data.length === 0) {
-
+                if(!response.data || response.data.length === 0) {
                     rows = `
                         <tr>
                             <td colspan="8" class="empty">
@@ -392,33 +446,20 @@
                             </td>
                         </tr>
                     `;
-
                 } else {
-
                     $.each(response.data, function(index, item) {
-
                         rows += `
                             <tr>
-
                                 <td>${item.id}</td>
-
                                 <td>${item.karyawan_id}</td>
-
                                 <td>${item.tanggal}</td>
-
                                 <td>${item.jam_masuk ?? '-'}</td>
-
                                 <td>${item.jam_keluar ?? '-'}</td>
-
                                 <td>${getBadge(item.status_kehadiran)}</td>
-
                                 <td>${item.keterangan ?? '-'}</td>
-
                                 <td>
-
                                     <button
                                         class="btn-edit"
-
                                         data-id="${item.id}"
                                         data-karyawan_id="${item.karyawan_id}"
                                         data-tanggal="${item.tanggal}"
@@ -430,15 +471,10 @@
                                         Edit
                                     </button>
 
-                                    <button
-                                        class="btn-delete"
-                                        data-id="${item.id}"
-                                    >
+                                    <button class="btn-delete" data-id="${item.id}">
                                         Hapus
                                     </button>
-
                                 </td>
-
                             </tr>
                         `;
                     });
@@ -446,7 +482,6 @@
 
                 $("#dataKehadiran").html(rows);
             },
-
             error: function() {
                 alert("Gagal mengambil data");
             }
@@ -456,45 +491,28 @@
     loadKehadiran();
 
     $("#formKehadiran").submit(function(e) {
-
         e.preventDefault();
 
         let id = $("#id_kehadiran").val();
-
         let method = id ? "PUT" : "POST";
-
         let url = id ? apiUrl + "/" + id : apiUrl;
 
         $.ajax({
-
             url: url,
-
             type: method,
-
             data: {
-
                 karyawan_id: $("#karyawan_id").val(),
-
                 tanggal: $("#tanggal").val(),
-
                 jam_masuk: $("#jam_masuk").val(),
-
                 jam_keluar: $("#jam_keluar").val(),
-
                 status_kehadiran: $("#status_kehadiran").val(),
-
                 keterangan: $("#keterangan").val()
             },
-
             success: function(response) {
-
                 alert(response.message);
-
                 resetForm();
-
                 loadKehadiran();
             },
-
             error: function() {
                 alert("Gagal menyimpan data");
             }
@@ -502,19 +520,12 @@
     });
 
     $("#dataKehadiran").on("click", ".btn-edit", function() {
-
         $("#id_kehadiran").val($(this).data("id"));
-
         $("#karyawan_id").val($(this).data("karyawan_id"));
-
         $("#tanggal").val($(this).data("tanggal"));
-
         $("#jam_masuk").val($(this).data("jam_masuk"));
-
         $("#jam_keluar").val($(this).data("jam_keluar"));
-
         $("#status_kehadiran").val($(this).data("status_kehadiran"));
-
         $("#keterangan").val($(this).data("keterangan"));
 
         $("#btnSubmit").text("Update Kehadiran");
@@ -523,28 +534,19 @@
             top: 0,
             behavior: "smooth"
         });
-
     });
 
     $("#dataKehadiran").on("click", ".btn-delete", function() {
-
         let id = $(this).data("id");
 
         if(confirm("Yakin ingin menghapus data ini?")) {
-
             $.ajax({
-
                 url: apiUrl + "/" + id,
-
                 type: "DELETE",
-
                 success: function(response) {
-
                     alert(response.message);
-
                     loadKehadiran();
                 },
-
                 error: function() {
                     alert("Gagal menghapus data");
                 }
@@ -555,7 +557,6 @@
     $("#btnReset").click(function() {
         resetForm();
     });
-
 </script>
 
 </body>

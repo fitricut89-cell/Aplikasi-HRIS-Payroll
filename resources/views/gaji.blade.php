@@ -337,8 +337,14 @@
         e.preventDefault();
 
         let id = $("#id_gaji").val();
-        let method = id ? "PUT" : "POST";
-        let url = id ? apiUrl + "/" + id : apiUrl;
+
+        let url = apiUrl;
+        let method = "POST";
+
+        if (id !== "") {
+            url = apiUrl + "/" + id;
+            method = "PUT";
+        }
 
         $.ajax({
             url: url,
@@ -356,20 +362,21 @@
                 resetForm();
                 loadGaji();
             },
-            error:function() {
-                alert("Gagal menyimpan data gaji");
+            error:function(xhr) {
+                console.log(xhr.responseText);
+                alert("Gagal menyimpan data gaji. Cek Console/F12.");
             }
         });
     });
 
     $("#dataGaji").on("click",".btn-edit",function() {
-        $("#id_gaji").val($(this).data("id"));
-        $("#karyawan_id").val($(this).data("karyawan_id"));
-        $("#bulan").val($(this).data("bulan"));
-        $("#tahun").val($(this).data("tahun"));
-        $("#gaji_pokok").val($(this).data("gaji_pokok"));
-        $("#tunjangan").val($(this).data("tunjangan"));
-        $("#potongan").val($(this).data("potongan"));
+        $("#id_gaji").val($(this).attr("data-id"));
+        $("#karyawan_id").val($(this).attr("data-karyawan_id"));
+        $("#bulan").val($(this).attr("data-bulan"));
+        $("#tahun").val($(this).attr("data-tahun"));
+        $("#gaji_pokok").val($(this).attr("data-gaji_pokok"));
+        $("#tunjangan").val($(this).attr("data-tunjangan"));
+        $("#potongan").val($(this).attr("data-potongan"));
 
         $("#btnSubmit").text("Update Gaji");
 
@@ -380,7 +387,7 @@
     });
 
     $("#dataGaji").on("click",".btn-delete",function() {
-        let id = $(this).data("id");
+        let id = $(this).attr("data-id");
 
         if(confirm("Yakin ingin menghapus data gaji?")) {
             $.ajax({
@@ -390,7 +397,8 @@
                     alert(response.message);
                     loadGaji();
                 },
-                error:function() {
+                error:function(xhr) {
+                    console.log(xhr.responseText);
                     alert("Gagal menghapus data gaji");
                 }
             });

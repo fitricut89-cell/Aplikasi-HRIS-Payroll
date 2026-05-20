@@ -1,11 +1,23 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\KehadiranController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::apiResource('kehadirans', KehadiranController::class);
+Route::get('/karyawan', function () {
+    return view('karyawan');
+});
+
+Route::get('/jabatan', function () {
+    return view('jabatan');
+});
+
+Route::get('/gaji', function () {
+    return view('gaji');
+});
+
+Route::get('/kehadiran', function () {
+    return view('kehadiran');
+});

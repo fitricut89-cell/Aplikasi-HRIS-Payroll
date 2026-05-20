@@ -8,4 +8,6 @@ Route::get('/', function () {
 
 Route::get('/gaji', function () {
     return view('gaji');
+Route::get('/jabatan', function () {
+    return view('jabatan');
 });

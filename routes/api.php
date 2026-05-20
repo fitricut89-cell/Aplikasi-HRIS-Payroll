@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GajiController;
 
@@ -9,3 +8,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::apiResource('gajis', GajiController::class);
+use App\Http\Controllers\JabatanController;
+
+Route::apiResource('jabatans', JabatanController::class);

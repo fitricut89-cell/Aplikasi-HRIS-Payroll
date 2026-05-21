@@ -21,3 +21,7 @@ Route::get('/gaji', function () {
 Route::get('/kehadiran', function () {
     return view('kehadiran');
 });
+
+Route::get('/cuti', function () {
+    return view('cuti');
+});
